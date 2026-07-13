@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Asparagus Empire</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#2f7d32;
+    color:white;
+}
+
+#login{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1f5b24;
+}
+
+.caixa{
+    background:#3b9b40;
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+}
+
+input{
+    padding:12px;
+    width:250px;
+    font-size:18px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 30px;
+    font-size:18px;
+    cursor:pointer;
+    border:none;
+    border-radius:8px;
+}
+
+#game{
+    display:none;
+    text-align:center;
+    margin-top:100px;
+}
+
+#aspargo{
+    font-size:150px;
+    cursor:pointer;
+    user-select:none;
+}
+</style>
+
+</head>
+<body>
+
+<div id="login">
+    <div class="caixa">
+        <h1>🥬 Asparagus Empire</h1>
+
+        <p>Qual é o seu nome?</p>
+
+        <input id="nome" maxlength="20" placeholder="Digite seu nome">
+
+        <br>
+
+        <button onclick="entrar()">Jogar</button>
+    </div>
+</div>
+
+<div id="game">
+
+<h1>Bem-vindo, <span id="player"></span>!</h1>
+
+<h2>Aspargos: <span id="score">0</span></h2>
+
+<div id="aspargo">🥬</div>
+
+</div>
+
+<script>
+
+let pontos = 0;
+
+document.getElementById("aspargo").onclick = function(){
+    pontos++;
+    document.getElementById("score").innerText = pontos;
+}
+
+function entrar(){
+
+    let nome = document.getElementById("nome").value.trim();
+
+    if(nome == ""){
+        alert("Digite seu nome!");
+        return;
+    }
+
+    localStorage.setItem("nomeJogador", nome);
+
+    document.getElementById("player").innerText = nome;
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("game").style.display = "block";
+
+}
+
+window.onload = function(){
+
+    let salvo = localStorage.getItem("nomeJogador");
+
+    if(salvo){
+
+        document.getElementById("player").innerText = salvo;
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("game").style.display = "block";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
